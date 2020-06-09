@@ -14,6 +14,10 @@
 		EF44B597248ED80A00454625 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF44B596248ED80A00454625 /* Assets.xcassets */; };
 		EF44B59A248ED80A00454625 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF44B598248ED80A00454625 /* LaunchScreen.storyboard */; };
 		EF44B5A2248ED83900454625 /* Hand.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = EF44B5A1248ED83900454625 /* Hand.mlmodel */; };
+		EF44B5A4248EDC4200454625 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF44B5A3248EDC4200454625 /* Helpers.swift */; };
+		EF44B5A8248EDCA500454625 /* Nodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF44B5A6248EDCA500454625 /* Nodes.swift */; };
+		EF44B5AB248EDD0100454625 /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF44B5AA248EDD0100454625 /* Box.swift */; };
+		EFE21A57248FA5AE002D245F /* TouchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE21A56248FA5AE002D245F /* TouchManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +30,10 @@
 		EF44B599248ED80A00454625 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EF44B59B248ED80A00454625 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EF44B5A1248ED83900454625 /* Hand.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = Hand.mlmodel; path = ../../PinchDrawing/PinchDrawing/Hand.mlmodel; sourceTree = "<group>"; };
+		EF44B5A3248EDC4200454625 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		EF44B5A6248EDCA500454625 /* Nodes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Nodes.swift; sourceTree = "<group>"; };
+		EF44B5AA248EDD0100454625 /* Box.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Box.swift; sourceTree = "<group>"; };
+		EFE21A56248FA5AE002D245F /* TouchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +52,7 @@
 			children = (
 				EF44B58C248ED80600454625 /* Hand Interactive AR Playground */,
 				EF44B58B248ED80600454625 /* Products */,
+				EF44B5A5248EDC5100454625 /* Model */,
 			);
 			sourceTree = "<group>";
 		};
@@ -68,6 +77,17 @@
 				EF44B59B248ED80A00454625 /* Info.plist */,
 			);
 			path = "Hand Interactive AR Playground";
+			sourceTree = "<group>";
+		};
+		EF44B5A5248EDC5100454625 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				EF44B5A6248EDCA500454625 /* Nodes.swift */,
+				EF44B5A3248EDC4200454625 /* Helpers.swift */,
+				EF44B5AA248EDD0100454625 /* Box.swift */,
+				EFE21A56248FA5AE002D245F /* TouchManager.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -142,9 +162,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EFE21A57248FA5AE002D245F /* TouchManager.swift in Sources */,
+				EF44B5A8248EDCA500454625 /* Nodes.swift in Sources */,
 				EF44B592248ED80600454625 /* ViewController.swift in Sources */,
 				EF44B5A2248ED83900454625 /* Hand.mlmodel in Sources */,
+				EF44B5AB248EDD0100454625 /* Box.swift in Sources */,
 				EF44B58E248ED80600454625 /* AppDelegate.swift in Sources */,
+				EF44B5A4248EDC4200454625 /* Helpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
