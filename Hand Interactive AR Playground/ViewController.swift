@@ -52,6 +52,10 @@ class ViewController: UIViewController, ARSCNViewDelegate,SCNSceneRendererDelega
     var f3 = SCNNode()
     var g3 = SCNNode()
     
+
+
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Set the view's delegate
@@ -61,9 +65,11 @@ class ViewController: UIViewController, ARSCNViewDelegate,SCNSceneRendererDelega
         sceneView.showsStatistics = true
 //        sceneView.debugOptions = .showPhysicsShapes
         sceneView.scene.physicsWorld.contactDelegate = self
-//        sceneView.scene.physicsWorld.timeStep = 1/10
+        sceneView.scene.physicsWorld.timeStep = 1/60
 //        sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin]
        
+        
+         var detectionTimer = Timer.scheduledTimer(timeInterval: 0.0166, target: self, selector: #selector(ViewController.startDetection), userInfo: nil, repeats: true)
         
         
         startButton = playground.rootNode.childNode(withName: "startButton", recursively: true)!
@@ -191,11 +197,11 @@ class ViewController: UIViewController, ARSCNViewDelegate,SCNSceneRendererDelega
         eulerY = frame.camera.eulerAngles.y * -1
         eulerX = frame.camera.eulerAngles.x
         currentBuffer = frame.capturedImage
-        
-        startDetection()
+       
+//        startDetection()
     }
     
-
+ 
     let visionQueue = DispatchQueue(label: "joao.visionQueue")
     
     private lazy var predictionRequest: VNCoreMLRequest = {
@@ -215,7 +221,7 @@ class ViewController: UIViewController, ARSCNViewDelegate,SCNSceneRendererDelega
     
     var obs:AnyObject?
 
-      private func startDetection() {
+    @objc private func startDetection() {
             // Here we will do our CoreML request on currentBuffer
             
             guard let buffer = currentBuffer else { return }
