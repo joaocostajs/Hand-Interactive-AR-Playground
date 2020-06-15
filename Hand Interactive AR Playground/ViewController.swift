@@ -20,6 +20,7 @@ import AudioToolbox
 enum BitMaskCategory: Int {
     case finger = 4
     case button = 8
+    case box1 = 10
 }
 
 class ViewController: UIViewController, ARSCNViewDelegate,SCNSceneRendererDelegate, ARSessionDelegate,AVCaptureVideoDataOutputSampleBufferDelegate, SCNPhysicsContactDelegate{
@@ -34,7 +35,8 @@ class ViewController: UIViewController, ARSCNViewDelegate,SCNSceneRendererDelega
     var touchmanager = TouchManager()
     let playground = SCNScene(named: "art.scnassets/playground.scn")!
     var startButton:SCNNode = SCNNode()
-    
+    var box1 = SCNNode()
+    var bNode = SCNNode()
     override func viewDidLoad() {
         super.viewDidLoad()
         // Set the view's delegate
@@ -48,17 +50,26 @@ class ViewController: UIViewController, ARSCNViewDelegate,SCNSceneRendererDelega
 //        sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin]
        
         
-        startButton = playground.rootNode.childNode(withName: "startButton", recursively: true) as! SCNNode
+        startButton = playground.rootNode.childNode(withName: "startButton", recursively: true)!
         startButton.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(geometry: SCNBox(width: 0.4 , height: 0.4, length: 0.2, chamferRadius: 0)))
         startButton.physicsBody?.categoryBitMask = BitMaskCategory.button.rawValue
         startButton.physicsBody?.contactTestBitMask = BitMaskCategory.finger.rawValue
         sceneView.scene.rootNode.addChildNode( startButton)
         
-        nodes.caixa.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(geometry: SCNBox(width:  0.1, height:  0.1, length:  0.1, chamferRadius: 0)))
+     
+        box1 = playground.rootNode.childNode(withName: "box1", recursively: true)!
+        box1.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(geometry: SCNBox(width: 0.25 , height: 0.25, length: 0.25, chamferRadius: 0)))
+        box1.physicsBody?.categoryBitMask = BitMaskCategory.box1.rawValue
+              box1.physicsBody?.contactTestBitMask = BitMaskCategory.finger.rawValue
+        sceneView.scene.rootNode.addChildNode(box1)
+        bNode = startButton
+        sceneView.scene.rootNode.addChildNode(bNode)
+        
+        nodes.caixa.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(geometry: SCNBox(width: 0.04, height: 0.04, length: 0.04, chamferRadius: 0.01)))
         nodes.caixa.physicsBody?.categoryBitMask = BitMaskCategory.finger.rawValue
         nodes.caixa.physicsBody?.contactTestBitMask = BitMaskCategory.button.rawValue
         
-         self.sceneView.scene.rootNode.addChildNode(nodes.caixa)
+        self.sceneView.scene.rootNode.addChildNode(nodes.caixa)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -96,6 +107,17 @@ class ViewController: UIViewController, ARSCNViewDelegate,SCNSceneRendererDelega
           }
           sceneView.session.run(config)
       }
+    
+//    var bNodeBool = false
+    func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
+        if contact.nodeA.physicsBody?.categoryBitMask == 4 {
+            bNode = contact.nodeB
+        }else {
+            bNode = contact.nodeA
+        }
+     
+      
+    }
 
       var eulerX:Float = 0
     var eulerY:Float = 0
@@ -184,7 +206,11 @@ class ViewController: UIViewController, ARSCNViewDelegate,SCNSceneRendererDelega
                                                 self.nodes.caixa.position = SCNVector3(join.x, join.y, join.z)
                                              
                                                 self.sceneView.scene.rootNode.addChildNode(self.nodes.caixa)
-                                                self.touchmanager.touchBegan(nodeA: self.nodes.caixa, nodeB: self.startButton, physicsWorld: self.sceneView.scene.physicsWorld)
+                                                
+                                                   self.touchmanager.touchBegan(nodeA: self.nodes.caixa, nodeB: self.bNode, physicsWorld: self.sceneView.scene.physicsWorld)
+                                
+
+                                               
                                             }
                         }
                     }
@@ -193,6 +219,10 @@ class ViewController: UIViewController, ARSCNViewDelegate,SCNSceneRendererDelega
                 self.currentBuffer = nil
                 
             }
+      
         }
+    
+  
 }
+
 
