@@ -17,6 +17,11 @@
 		EF44B5A4248EDC4200454625 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF44B5A3248EDC4200454625 /* Helpers.swift */; };
 		EF44B5A8248EDCA500454625 /* Nodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF44B5A6248EDCA500454625 /* Nodes.swift */; };
 		EF44B5AB248EDD0100454625 /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF44B5AA248EDD0100454625 /* Box.swift */; };
+		EF8D43682497A933007FD366 /* c3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EF8D43672497A933007FD366 /* c3.mp3 */; };
+		EF8D436A2497AE63007FD366 /* d3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EF8D43692497AE63007FD366 /* d3.mp3 */; };
+		EF8D436E2497B132007FD366 /* g3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EF8D436B2497B132007FD366 /* g3.mp3 */; };
+		EF8D436F2497B132007FD366 /* e3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EF8D436C2497B132007FD366 /* e3.mp3 */; };
+		EF8D43702497B132007FD366 /* f3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EF8D436D2497B132007FD366 /* f3.mp3 */; };
 		EFE21A57248FA5AE002D245F /* TouchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE21A56248FA5AE002D245F /* TouchManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -33,6 +38,11 @@
 		EF44B5A3248EDC4200454625 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		EF44B5A6248EDCA500454625 /* Nodes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Nodes.swift; sourceTree = "<group>"; };
 		EF44B5AA248EDD0100454625 /* Box.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Box.swift; sourceTree = "<group>"; };
+		EF8D43672497A933007FD366 /* c3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = c3.mp3; sourceTree = "<group>"; };
+		EF8D43692497AE63007FD366 /* d3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = d3.mp3; sourceTree = "<group>"; };
+		EF8D436B2497B132007FD366 /* g3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = g3.mp3; sourceTree = "<group>"; };
+		EF8D436C2497B132007FD366 /* e3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = e3.mp3; sourceTree = "<group>"; };
+		EF8D436D2497B132007FD366 /* f3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = f3.mp3; sourceTree = "<group>"; };
 		EFE21A56248FA5AE002D245F /* TouchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -74,6 +84,11 @@
 				EF44B593248ED80600454625 /* Main.storyboard */,
 				EF44B596248ED80A00454625 /* Assets.xcassets */,
 				EF44B598248ED80A00454625 /* LaunchScreen.storyboard */,
+				EF8D43672497A933007FD366 /* c3.mp3 */,
+				EF8D43692497AE63007FD366 /* d3.mp3 */,
+				EF8D436C2497B132007FD366 /* e3.mp3 */,
+				EF8D436D2497B132007FD366 /* f3.mp3 */,
+				EF8D436B2497B132007FD366 /* g3.mp3 */,
 				EF44B59B248ED80A00454625 /* Info.plist */,
 			);
 			path = "Hand Interactive AR Playground";
@@ -152,6 +167,11 @@
 				EF44B59A248ED80A00454625 /* LaunchScreen.storyboard in Resources */,
 				EF44B597248ED80A00454625 /* Assets.xcassets in Resources */,
 				EF44B595248ED80600454625 /* Main.storyboard in Resources */,
+				EF8D436F2497B132007FD366 /* e3.mp3 in Resources */,
+				EF8D43682497A933007FD366 /* c3.mp3 in Resources */,
+				EF8D436E2497B132007FD366 /* g3.mp3 in Resources */,
+				EF8D43702497B132007FD366 /* f3.mp3 in Resources */,
+				EF8D436A2497AE63007FD366 /* d3.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

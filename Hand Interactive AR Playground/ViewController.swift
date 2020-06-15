@@ -21,6 +21,12 @@ enum BitMaskCategory: Int {
     case finger = 4
     case button = 8
     case box1 = 10
+    case pyra = 2
+    case C = 3
+    case d3 = 5
+    case e3 = 6
+    case f3 = 7
+    case g3 = 9
 }
 
 class ViewController: UIViewController, ARSCNViewDelegate,SCNSceneRendererDelegate, ARSessionDelegate,AVCaptureVideoDataOutputSampleBufferDelegate, SCNPhysicsContactDelegate{
@@ -34,9 +40,18 @@ class ViewController: UIViewController, ARSCNViewDelegate,SCNSceneRendererDelega
     let nodes = Nodes()
     var touchmanager = TouchManager()
     let playground = SCNScene(named: "art.scnassets/playground.scn")!
+    
     var startButton:SCNNode = SCNNode()
     var box1 = SCNNode()
+    var geosphere = SCNNode()
     var bNode = SCNNode()
+    var pyra = SCNNode()
+    var C = SCNNode()
+    var d3 = SCNNode()
+    var e3 = SCNNode()
+    var f3 = SCNNode()
+    var g3 = SCNNode()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Set the view's delegate
@@ -50,6 +65,7 @@ class ViewController: UIViewController, ARSCNViewDelegate,SCNSceneRendererDelega
 //        sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin]
        
         
+        
         startButton = playground.rootNode.childNode(withName: "startButton", recursively: true)!
         startButton.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(geometry: SCNBox(width: 0.4 , height: 0.4, length: 0.2, chamferRadius: 0)))
         startButton.physicsBody?.categoryBitMask = BitMaskCategory.button.rawValue
@@ -59,13 +75,58 @@ class ViewController: UIViewController, ARSCNViewDelegate,SCNSceneRendererDelega
      
         box1 = playground.rootNode.childNode(withName: "box1", recursively: true)!
         box1.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(geometry: SCNBox(width: 0.25 , height: 0.25, length: 0.25, chamferRadius: 0)))
+        box1.geometry?.firstMaterial?.specular.contents = #colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1)
         box1.physicsBody?.categoryBitMask = BitMaskCategory.box1.rawValue
               box1.physicsBody?.contactTestBitMask = BitMaskCategory.finger.rawValue
         sceneView.scene.rootNode.addChildNode(box1)
+        
+        pyra = playground.rootNode.childNode(withName: "pyramid", recursively: true)!
+        pyra.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(geometry: SCNPyramid(width: 0.5, height: 0.5, length: 0.5) ))
+        pyra.physicsBody?.categoryBitMask = BitMaskCategory.pyra.rawValue
+        pyra.physicsBody?.contactTestBitMask = BitMaskCategory.finger.rawValue
+        sceneView.scene.rootNode.addChildNode(pyra)
+        
+        C = playground.rootNode.childNode(withName: "c3", recursively: true)!
+             C.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(geometry: SCNBox(width: 0.1, height: 0.1, length: 0.2, chamferRadius: 0) ))
+             C.physicsBody?.categoryBitMask = BitMaskCategory.C.rawValue
+             C.physicsBody?.contactTestBitMask = BitMaskCategory.finger.rawValue
+             sceneView.scene.rootNode.addChildNode(C)
+        
+        d3 = playground.rootNode.childNode(withName: "d3", recursively: true)!
+        d3.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(geometry: SCNBox(width: 0.1, height: 0.1, length: 0.2, chamferRadius: 0) ))
+        d3.physicsBody?.categoryBitMask = BitMaskCategory.d3.rawValue
+        d3.physicsBody?.contactTestBitMask = BitMaskCategory.finger.rawValue
+        sceneView.scene.rootNode.addChildNode(d3)
+        
+        e3 = playground.rootNode.childNode(withName: "e3", recursively: true)!
+               e3.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(geometry: SCNBox(width: 0.1, height: 0.1, length: 0.2, chamferRadius: 0) ))
+               e3.physicsBody?.categoryBitMask = BitMaskCategory.e3.rawValue
+               e3.physicsBody?.contactTestBitMask = BitMaskCategory.finger.rawValue
+               sceneView.scene.rootNode.addChildNode(e3)
+        
+        f3 = playground.rootNode.childNode(withName: "f3", recursively: true)!
+               f3.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(geometry: SCNBox(width: 0.1, height: 0.1, length: 0.2, chamferRadius: 0) ))
+               f3.physicsBody?.categoryBitMask = BitMaskCategory.f3.rawValue
+               f3.physicsBody?.contactTestBitMask = BitMaskCategory.finger.rawValue
+               sceneView.scene.rootNode.addChildNode(f3)
+        
+        g3 = playground.rootNode.childNode(withName: "g3", recursively: true)!
+               g3.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(geometry: SCNBox(width: 0.1, height: 0.1, length: 0.2, chamferRadius: 0) ))
+               g3.physicsBody?.categoryBitMask = BitMaskCategory.g3.rawValue
+               g3.physicsBody?.contactTestBitMask = BitMaskCategory.finger.rawValue
+               sceneView.scene.rootNode.addChildNode(g3)
+        
+        geosphere = playground.rootNode.childNode(withName: "geosphere", recursively: true)!
+            geosphere.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(geometry: SCNSphere(radius: 0.15)))
+            geosphere.physicsBody?.categoryBitMask = BitMaskCategory.box1.rawValue
+                  geosphere.physicsBody?.contactTestBitMask = BitMaskCategory.finger.rawValue
+            sceneView.scene.rootNode.addChildNode(geosphere)
+        
+        
         bNode = startButton
         sceneView.scene.rootNode.addChildNode(bNode)
         
-        nodes.caixa.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(geometry: SCNBox(width: 0.04, height: 0.04, length: 0.04, chamferRadius: 0.01)))
+        nodes.caixa.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(geometry: SCNBox(width: 0.02, height: 0.02, length: 0.02, chamferRadius: 0.01)))
         nodes.caixa.physicsBody?.categoryBitMask = BitMaskCategory.finger.rawValue
         nodes.caixa.physicsBody?.contactTestBitMask = BitMaskCategory.button.rawValue
         
