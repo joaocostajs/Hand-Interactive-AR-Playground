@@ -13,16 +13,51 @@ import SceneKit
 
 struct Helpers {
     
-   
-   
-   var rotationAngle:Double = 0
-   var xxx:Double = 0
-   var yyy:Double = 0
-   var zzz:Double = 0
-   var fov:Double = 0
-   
+    
+    
+    var rotationAngle:Double = 0
+    var xxx:Double = 0
+    var yyy:Double = 0
+    var zzz:Double = 0
+    var fov:Double = 0
+    var nodes = Nodes()
 
-//   let colors:[UIColor] = [#colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1), #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1), #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1), #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1), #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1), #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1), #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1) , #colorLiteral(red: 0.1752713529, green: 0.1156517789, blue: 0.2982367167, alpha: 1) , #colorLiteral(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1), #colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1), #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1), #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1), #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1), #colorLiteral(red: 0.8549019694, green: 0.250980407, blue: 0.4784313738, alpha: 1), #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1), #colorLiteral(red: 0.5725490451, green: 0, blue: 0.2313725501, alpha: 1), #colorLiteral(red: 0.4392156899, green: 0.01176470611, blue: 0.1921568662, alpha: 1), #colorLiteral(red: 0.3098039329, green: 0.01568627544, blue: 0.1294117719, alpha: 1), #colorLiteral(red: 0.1921568662, green: 0.007843137719, blue: 0.09019608051, alpha: 1)]
+    func calculateDistance(finger node1:SCNNode, closestNode node2:SCNNode) -> Double{
+        let finger = node1
+        let node2 = node2
+        
+        let distance = Double(abs(sqrt(
+            pow(node2.position.x - finger.position.x, 2) +
+                pow(node2.position.y - finger.position.y, 2) +
+                pow(node2.position.z - finger.position.z, 2)
+        )))
+        
+        return distance
+    }
+    
+   
+    
+//    func smallestDistance(allNodes:[SCNNode], smallestDistance:Double){
+//        for node in allNodes {
+//            if (calculateDistance(finger: nodes.caixa, closestNode: node) < smallestDistance && calculateDistance(finger: nodes.caixa, closestNode: node) != 0 ){
+//                smallestDistance = helpers.calculateDistance(finger: nodes.caixa, closestNode: node)
+//            }
+//        }
+//        
+//        print("acabou", smallestDistance)
+//    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     func DebugBoxPosition(rect:CGRect, VC:ViewController) -> CGRect {
         var x = VC.sceneView.frame.size.width * 1.62318 * rect.minX
@@ -46,36 +81,36 @@ struct Helpers {
         return newX
     }
     mutating func findY(y:CGFloat, height:CGFloat, depth:Double,VC:ViewController) -> CGFloat{
-           var YfromCenter = VC.view.frame.size.height - (VC.view.frame.size.height - y - height/2)
-           YfromCenter = YfromCenter -  VC.view.frame.size.height / 2
-           
-           fov = Double((VC.sceneView.pointOfView?.camera!.fieldOfView)!)
-           // regra de 3 simples basicamente o bocado de ecra a partir do centro vezes o angulo total a dividir por metade da largura do ecra para saber o angulo que preciso usar
-           var angleNeeded = YfromCenter * CGFloat(fov) / VC.view.frame.size.width/2
-           //to radians
-           angleNeeded = angleNeeded * .pi / 180
-           //find missing side of triangle
-           let newY =  CGFloat(depth) * tan(angleNeeded)
-           return newY
-       }
+        var YfromCenter = VC.view.frame.size.height - (VC.view.frame.size.height - y - height/2)
+        YfromCenter = YfromCenter -  VC.view.frame.size.height / 2
+        
+        fov = Double((VC.sceneView.pointOfView?.camera!.fieldOfView)!)
+        // regra de 3 simples basicamente o bocado de ecra a partir do centro vezes o angulo total a dividir por metade da largura do ecra para saber o angulo que preciso usar
+        var angleNeeded = YfromCenter * CGFloat(fov) / VC.view.frame.size.width/2
+        //to radians
+        angleNeeded = angleNeeded * .pi / 180
+        //find missing side of triangle
+        let newY =  CGFloat(depth) * tan(angleNeeded)
+        return newY
+    }
     
     func rotatePoint(X:CGFloat,Y:CGFloat,depth:Double, eulerX:Float, eulerY:Float) -> SCNVector3{
         
-//        // 1. primeiro digamos que roda sobre o eixo Y e temos novos X e Z
-//        let Xprime = X * cos(CGFloat(eulerY)) - CGFloat(depth) * sin(CGFloat(eulerY))
-//        var Zprime = CGFloat(depth) * cos(CGFloat(eulerY)) + X * sin(CGFloat(eulerY))
-//        // 2. vamos rodar sobre o eixo X e obter o Y e um novo Z
-//        let Yprime = Y * cos(CGFloat(eulerX)) - Zprime * sin(CGFloat(eulerX))
-//        Zprime = Zprime * cos(CGFloat(eulerX)) + Y * sin(CGFloat(eulerX))
+        //        // 1. primeiro digamos que roda sobre o eixo Y e temos novos X e Z
+        //        let Xprime = X * cos(CGFloat(eulerY)) - CGFloat(depth) * sin(CGFloat(eulerY))
+        //        var Zprime = CGFloat(depth) * cos(CGFloat(eulerY)) + X * sin(CGFloat(eulerY))
+        //        // 2. vamos rodar sobre o eixo X e obter o Y e um novo Z
+        //        let Yprime = Y * cos(CGFloat(eulerX)) - Zprime * sin(CGFloat(eulerX))
+        //        Zprime = Zprime * cos(CGFloat(eulerX)) + Y * sin(CGFloat(eulerX))
         
         
-     
-               // 2. vamos rodar sobre o eixo X e obter o Y e um novo Z
-               let Yprime = Y * cos(CGFloat(eulerX)) - CGFloat(depth) * sin(CGFloat(eulerX))
-               var Zprime = CGFloat(depth) * cos(CGFloat(eulerX)) + Y * sin(CGFloat(eulerX))
-               // 1. primeiro digamos que roda sobre o eixo Y e temos novos X e Z
-               let Xprime = X * cos(CGFloat(eulerY)) - CGFloat(Zprime) * sin(CGFloat(eulerY))
-               Zprime = CGFloat(Zprime) * cos(CGFloat(eulerY)) + X * sin(CGFloat(eulerY))
+        
+        // 2. vamos rodar sobre o eixo X e obter o Y e um novo Z
+        let Yprime = Y * cos(CGFloat(eulerX)) - CGFloat(depth) * sin(CGFloat(eulerX))
+        var Zprime = CGFloat(depth) * cos(CGFloat(eulerX)) + Y * sin(CGFloat(eulerX))
+        // 1. primeiro digamos que roda sobre o eixo Y e temos novos X e Z
+        let Xprime = X * cos(CGFloat(eulerY)) - CGFloat(Zprime) * sin(CGFloat(eulerY))
+        Zprime = CGFloat(Zprime) * cos(CGFloat(eulerY)) + X * sin(CGFloat(eulerY))
         
         
         
@@ -85,7 +120,7 @@ struct Helpers {
     
     
     
- //       https://www.techjini.com/blog/calculate-the-distance-to-object-from-camera/
+    //       https://www.techjini.com/blog/calculate-the-distance-to-object-from-camera/
     func getDepth(heightOfObject heightofObject:Double, focal f:Double, h height:CGFloat,resY Y:CGFloat, sensorSizeX sx:Double) -> Double{
         let primeiraParte = f * heightofObject * Double(Y)
         let segundaParte = Double(height*2) * sx
@@ -95,7 +130,7 @@ struct Helpers {
     }
     
     func getTranslation(x:Float, y:Float,z:Float) -> SCNVector3 {
-       let vector = SCNVector3(x,y,z)
+        let vector = SCNVector3(x,y,z)
         return vector
     }
     
@@ -110,8 +145,8 @@ struct Helpers {
     var b = 0.0
     var a = 255.0
     mutating func getColor() -> UIColor{
-       
-       
+        
+        
         if(state == 0){
             g += 1
             if(g == 255){
@@ -141,7 +176,7 @@ struct Helpers {
             if(r == 255){
                 state = 5
             }
-                
+            
         }
         if(state == 5){
             b -= 1;
@@ -152,16 +187,16 @@ struct Helpers {
         
         return UIColor(red: CGFloat(r / 255), green: CGFloat(g / 255), blue: CGFloat(b / 255), alpha: 1)
         
-//        if(colorIndex == colors.count - 1){
-//           colorIndex = 0
-//        }else {
-//           colorIndex = colorIndex + 1
-//        }
-//        return colors[colorIndex]
+        //        if(colorIndex == colors.count - 1){
+        //           colorIndex = 0
+        //        }else {
+        //           colorIndex = colorIndex + 1
+        //        }
+        //        return colors[colorIndex]
         
     }
-   
-
+    
+    
     
     
 }

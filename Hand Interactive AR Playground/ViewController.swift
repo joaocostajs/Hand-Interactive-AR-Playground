@@ -135,8 +135,9 @@ class ViewController: UIViewController, ARSCNViewDelegate,SCNSceneRendererDelega
         nodes.caixa.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(geometry: SCNBox(width: 0.02, height: 0.02, length: 0.02, chamferRadius: 0.01)))
         nodes.caixa.physicsBody?.categoryBitMask = BitMaskCategory.finger.rawValue
         nodes.caixa.physicsBody?.contactTestBitMask = BitMaskCategory.button.rawValue
+        nodes.caixa.name = "Finger"
         
-        self.sceneView.scene.rootNode.addChildNode(nodes.caixa)
+      
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -155,6 +156,28 @@ class ViewController: UIViewController, ARSCNViewDelegate,SCNSceneRendererDelega
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
             self.togglePeopleOcclusion()
         })
+        
+            self.sceneView.scene.rootNode.addChildNode(nodes.caixa)
+              
+              var smallestDistance:Double = helpers.calculateDistance(finger: nodes.caixa, closestNode: self.sceneView.scene.rootNode.childNodes[1])
+              
+              var allNodes = self.sceneView.scene.rootNode.childNodes
+//            var finalDistance = helpers.getClosestNode(allNodes:allNodes, smallestDistance: smallestDistance)
+//        print(finalDistance, "finalDistance")
+        
+        func loop(){
+            for node in allNodes {
+                               if (helpers.calculateDistance(finger: nodes.caixa, closestNode: node) < smallestDistance && helpers.calculateDistance(finger: nodes.caixa, closestNode: node) != 0 ){
+                                   smallestDistance = helpers.calculateDistance(finger: nodes.caixa, closestNode: node)
+                               }
+                         }
+
+            print("acabou", smallestDistance)
+        }
+
+        loop()
+             
+        
        
     }
     fileprivate func togglePeopleOcclusion() {
@@ -173,6 +196,8 @@ class ViewController: UIViewController, ARSCNViewDelegate,SCNSceneRendererDelega
               
           }
           sceneView.session.run(config)
+
+        
       }
     
 //    var bNodeBool = false
@@ -274,10 +299,7 @@ class ViewController: UIViewController, ARSCNViewDelegate,SCNSceneRendererDelega
                                              
                                                 self.sceneView.scene.rootNode.addChildNode(self.nodes.caixa)
                                                 
-                                                   self.touchmanager.touchBegan(nodeA: self.nodes.caixa, nodeB: self.bNode, physicsWorld: self.sceneView.scene.physicsWorld)
-                                
-
-                                               
+                                                self.touchmanager.touchBegan(nodeA: self.nodes.caixa, nodeB: self.bNode, physicsWorld: self.sceneView.scene.physicsWorld)
                                             }
                         }
                     }

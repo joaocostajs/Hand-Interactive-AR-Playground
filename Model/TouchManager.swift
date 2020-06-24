@@ -47,8 +47,10 @@ struct TouchManager{
         }
     }
     
-    
+    let connectQueue = DispatchQueue(label: "connectQueue", attributes: .concurrent)//This creates a concurrent Queue
+
     func  playSound(sound:String) {
+         connectQueue.sync {
         guard let url = Bundle.main.url(forResource: sound, withExtension: "mp3") else { return }
 
         do {
@@ -68,7 +70,9 @@ struct TouchManager{
         } catch let error {
             print(error.localizedDescription)
         }
+        }
     }
+    
     
     mutating func buttonOnOff(A:SCNNode, B:SCNNode){
         

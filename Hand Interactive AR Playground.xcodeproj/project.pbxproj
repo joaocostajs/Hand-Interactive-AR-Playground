@@ -22,6 +22,7 @@
 		EF8D436E2497B132007FD366 /* g3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EF8D436B2497B132007FD366 /* g3.mp3 */; };
 		EF8D436F2497B132007FD366 /* e3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EF8D436C2497B132007FD366 /* e3.mp3 */; };
 		EF8D43702497B132007FD366 /* f3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EF8D436D2497B132007FD366 /* f3.mp3 */; };
+		EFA418D7249B5E3B00E081FA /* DrawLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA418D6249B5E3B00E081FA /* DrawLine.swift */; };
 		EFE21A57248FA5AE002D245F /* TouchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE21A56248FA5AE002D245F /* TouchManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +44,7 @@
 		EF8D436B2497B132007FD366 /* g3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = g3.mp3; sourceTree = "<group>"; };
 		EF8D436C2497B132007FD366 /* e3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = e3.mp3; sourceTree = "<group>"; };
 		EF8D436D2497B132007FD366 /* f3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = f3.mp3; sourceTree = "<group>"; };
+		EFA418D6249B5E3B00E081FA /* DrawLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawLine.swift; sourceTree = "<group>"; };
 		EFE21A56248FA5AE002D245F /* TouchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -101,6 +103,7 @@
 				EF44B5A3248EDC4200454625 /* Helpers.swift */,
 				EF44B5AA248EDD0100454625 /* Box.swift */,
 				EFE21A56248FA5AE002D245F /* TouchManager.swift */,
+				EFA418D6249B5E3B00E081FA /* DrawLine.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -189,6 +192,7 @@
 				EF44B5AB248EDD0100454625 /* Box.swift in Sources */,
 				EF44B58E248ED80600454625 /* AppDelegate.swift in Sources */,
 				EF44B5A4248EDC4200454625 /* Helpers.swift in Sources */,
+				EFA418D7249B5E3B00E081FA /* DrawLine.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
