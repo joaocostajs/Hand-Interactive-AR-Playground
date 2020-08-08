@@ -296,7 +296,18 @@ class ViewController: UIViewController, ARSCNViewDelegate,SCNSceneRendererDelega
 
                                                 self.nodes.caixa.geometry?.firstMaterial?.diffuse.contents = self.helpers.getColor()
                                                 self.nodes.caixa.position = SCNVector3(join.x, join.y, join.z)
-                                             
+                                
+                                
+                                
+                                
+                                                let snake = SCNNode(geometry: SCNBox(width: 0.02, height: 0.02, length: 0.02, chamferRadius: 0.01))
+                                                    snake.geometry?.firstMaterial?.diffuse.contents = self.helpers.getColor()
+                                                    snake.position = SCNVector3(join.x, join.y, join.z)
+                                                    self.sceneView.scene.rootNode.addChildNode(snake)
+                                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
+                                                    snake.removeFromParentNode()
+                                                })
+                                
                                                 self.sceneView.scene.rootNode.addChildNode(self.nodes.caixa)
                                                 
                                                 self.touchmanager.touchBegan(nodeA: self.nodes.caixa, nodeB: self.bNode, physicsWorld: self.sceneView.scene.physicsWorld)
